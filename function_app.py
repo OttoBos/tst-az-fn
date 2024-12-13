@@ -1,3 +1,4 @@
+import datetime
 import azure.functions as func
 import logging
 
@@ -29,3 +30,8 @@ def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
              "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
              status_code=200
         )
+    
+@app.route(route="current_time")
+def current_time(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info('Got request on current_time')
+    return func.HttpResponse(f"Current server time is {datetime.datetime.now().__format__('%c')}.")
